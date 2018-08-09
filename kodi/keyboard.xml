@@ -1,0 +1,20 @@
+<keymap>
+  <FullscreenVideo>
+    <keyboard>
+      <pageup>ZoomIn</pageup>
+      <pagedown>ZoomOut</pagedown>
+	  <numpadthree>AudioNextLanguage</numpadthree>
+	  <numpadone>IncreasePAR</numpadone>
+	  <numpadtwo>DecreasePAR</numpadtwo>
+	  <numpadfive>Rewind</numpadfive>
+	  <numpadsix>FastForward</numpadsix>
+	  <numpadfour>SmallStepBack</numpadfour>
+	  <m mod="ctrl,shift">ShowSubtitles</m>
+	  <t mod="ctrl">NextSubtitle</t>
+	  <e mod="ctrl">AudioDelayMinus</e><!-- if audio is heard too early -->
+	  <i mod="ctrl">AudioDelayPlus</i><!-- if audio is heard too early -->
+	  <t mod="ctrl,shift">SubtitleDelayMinus</t>
+	  <m mod="ctrl">SubtitleDelayPlus</m>
+    </keyboard>
+  </FullscreenVideo>
+</keymap>

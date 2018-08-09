@@ -1,0 +1,1 @@
+"C:\Program Files (x86)\VMware\VMware Remote Console\vmrc.exe" vmrc://hekademos.hlb.de:443/?moid=vm-675

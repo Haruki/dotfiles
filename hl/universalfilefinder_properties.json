@@ -1,0 +1,9 @@
+{
+  "root": [
+    "c:/data/workspaces/neon_1/InvekosDB.git/invekos/packages",
+    "c:/data/workspaces/neon_1/InvekosDB.git/invekos/procedures",
+    "c:/data/workspaces/neon_1/InvekosDB.git/invekos_sys/packages",
+    "c:/data/workspaces/neon_1/InvekosDB.git/invekos_ext/packages",
+    "c:/data/workspaces/neon_1/InvekosDB.git/invekos_le/packages"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "root": [
+    "i:/Lieferungen/HZD/2016/"
+  ],
+  "ignoreFiles": [
+    "^(.*\\.SQL)",
+    "^(.*\\.LST)",
+    "^(.*\\.INI)",
+    "^(.*\\.~(.{3}))"
+  ],
+  "oldestRelevantLieferung": "20160104",
+  "ignoreLieferungen": [
+  ],
+  "ignorePattern": [
+    ".*XX.*",
+    ".*nur.*intern.*",
+    ".*nicht.*installieren.*"
+  ]
+}
