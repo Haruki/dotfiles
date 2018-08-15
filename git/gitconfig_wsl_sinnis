@@ -1,0 +1,19 @@
+[core]
+	autocrlf = true
+[user]
+	email = borsutzky@hansaluftbild.de
+	name = Harald Borsutzky
+[push]
+	default = simple
+[apply]
+ 	whitespace = nowarn
+[diff]
+	tool = kdiff3
+[merge]
+	tool = kdiff3
+[difftool "kdiff3"]
+	cmd = kdiff3.exe \"`echo $LOCAL | sed 's_/mnt/c_C:_'`\" \"`echo $REMOTE | sed 's_/mnt/c_C:_'`\"
+[mergetool "kdiff3"]
+	cmd = kdiff3.exe \"`echo $BASE | sed 's_/mnt/c_C:_'`\" \"`echo $LOCAL | sed 's_/mnt/c_C:_'`\" \"`echo $REMOTE | sed 's_/mnt/c_C:_'`\" -o \"`echo $MERGED | sed 's_/mnt/c_C:_'`\"
+
+

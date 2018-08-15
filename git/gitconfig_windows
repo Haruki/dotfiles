@@ -1,0 +1,13 @@
+[user]
+	name = borsutzha
+	email = borsutzky@hansaluftbild.de
+[core]
+	editor = 'c:/program files/sublime text 3/subl.exe' -w
+[merge]
+	tool = meld
+[mergetool "meld"]
+	path = C:\\Program Files (x86)\\Meld\\Meld.exe
+[diff]
+	tool = meld
+[difftool "meld"]
+	path = C:\\Program Files (x86)\\Meld\\Meld.exe
