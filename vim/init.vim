@@ -36,6 +36,7 @@ autocmd BufEnter * call ncm2#enable_for_buffer()
     Plug 'ncm2/ncm2-tmux'
     Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-go'
+Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 
 call plug#end()
 
