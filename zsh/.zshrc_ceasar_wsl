@@ -112,3 +112,6 @@ LS_COLORS='ow=01;36;40'
 
 eval $(/mnt/d/Utils/weasel-pageant-1.1/weasel-pageant -r)
 
+export GOPATH=~/go
+export PATH=$PATH:~/go/bin
+
