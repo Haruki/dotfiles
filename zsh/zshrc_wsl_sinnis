@@ -1,3 +1,6 @@
+export TERM="xterm-256color"
+
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -115,3 +118,7 @@ export NVM_DIR="$HOME/.nvm"
 LS_COLORS='ow=01;36;40'
 
 bindkey -v
+
+export GOPATH=~/go
+export PATH=$PATH:$GOPATH/bin
+
