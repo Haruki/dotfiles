@@ -1,5 +1,5 @@
 [core]
-	autocrlf = true
+	autocrlf = input
 [user]
 	email = borsutzky@hansaluftbild.de
 	name = Harald Borsutzky
