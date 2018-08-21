@@ -17,3 +17,5 @@
 	cmd = kdiff3.exe \"`echo $BASE | sed 's_/mnt/c_C:_'`\" \"`echo $LOCAL | sed 's_/mnt/c_C:_'`\" \"`echo $REMOTE | sed 's_/mnt/c_C:_'`\" -o \"`echo $MERGED | sed 's_/mnt/c_C:_'`\"
 
 
+[rerere]
+	enabled = true
