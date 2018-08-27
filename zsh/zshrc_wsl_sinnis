@@ -34,4 +34,5 @@ bindkey -v
 
 export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
+export TMPDIR='/mnt/c/Users/borsutzha/AppData/Local/Temp'
 
