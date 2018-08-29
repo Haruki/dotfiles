@@ -24,9 +24,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 Plug 'junegunn/vim-easy-align'
 Plug 'ncm2/ncm2'
 Plug 'roxma/nvim-yarp'
-autocmd BufEnter * call ncm2#enable_for_buffer()
-set completeopt=noinsert,menuone,noselect
 Plug 'ncm2/ncm2-path'
 Plug 'ncm2/ncm2-go'
+Plug 'mattn/emmet-vim'
 
 call plug#end()
+
+autocmd BufEnter * call ncm2#enable_for_buffer()
+set completeopt=noinsert,menuone,noselect
+let g:user_emmet_leader_key='<tab>'
+
