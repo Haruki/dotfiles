@@ -1,0 +1,32 @@
+.imdb-container {
+  background: lightblue;
+  padding: 10px;
+  font-family: Tahoma, Geneva, sans-serif;
+  border-style: solid;
+  border-radius: 5px;
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: max-content max-content;
+
+  align-items: center;
+  justify-items: start;
+  grid-gap: 10px 10px;
+}
+.filmz-name {
+  background: tomato;
+}
+.filmz-seen {
+  background: red;
+}
+.omdb-name {
+  background: gold;
+}
+.omdb-rating {
+  background: yellow;
+}
+.themoviedb-name {
+  background: teal;
+}
+.themoviedb-nameorig {
+  background: greenyellow;
+}

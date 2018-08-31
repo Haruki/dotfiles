@@ -1,0 +1,14 @@
+{
+  "name": "greasemonkey",
+  "version": "1.0.0",
+  "description": "browser user script für IMDB",
+  "main": "filmz_userscript_ceasar.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint": "^5.4.0"
+  }
+}
