@@ -1,4 +1,8 @@
 (async function() {
+  //externes CSS einbinden (Siehe GM_addStyle @resource und GM_getResourceText im header)
+  var newCSS = GM_getResourceText("customCSS");
+  GM_addStyle(newCSS);
+
   //iframe detection:
   if (window.top != window.self) {
     //dont run in iframes.
@@ -9,8 +13,22 @@
   var host = "https://filmz.pimpelkram.com";
   var themoviedbhost = "https://api.themoviedb.org";
 
-  console.log("starrrrting...");
+  console.log("starting...");
   var socialDivElement = clearSocialDiv();
+  socialDivElement.innerHTML = `
+      <div class="imdb-container">
+
+        <div class="filmz-name">leer alskdjf lasdkf alskd </div>
+        <div class="filmz-seen"><input type="checkbox" checked/> </div>
+
+
+        <div class="omdb-name"><div class="loader"></div></div>
+        <div class="omdb-rating">7,4</div>
+        <div class="themoviedb-name">themoviedb name blah la la la </div>
+        <div class="themoviedb-nameorig">the movie db fancy orig name</div>
+
+    </div>
+  `;
   var movieFormDiv = document.getElementById("movieForm");
   var messageDiv = document.getElementById("message");
 
@@ -27,64 +45,7 @@
   console.log("got imdbcode");
   console.log(pageMovie.imdbcode);
 
-  let filmzError = false;
-
-  //try fetch filmz api
-  let response = await fetch(
-    host + "/filmz/find?imdbCode=" + pageMovie.imdbcode,
-    {
-      method: "GET"
-      //headers: headers,
-      //credentials: 'user:passwd'
-    }
-  );
-
-  if (response.ok) {
-    response = response.json();
-  } else {
-    filmzError = true;
-    console.log("filmz response status: " + response.status);
-    response = JSON.stringify(response.status);
-  }
-
-  console.log("fetch filmz: " + response);
-  console.log("fetch feddich");
-
-  let filmzUser;
-  let filmzPass;
-  if (filmzError == true) {
-    console.log("filmz.user" + GM_getValue("filmz.user"));
-    if (
-      typeof GM_getValue("filmz.user") == "undefined" ||
-      typeof GM_getValue("filmz.pass") == "undefined"
-    ) {
-      console.log("filmz.user und pass nicht gesetzt.");
-      filmzUser = prompt("filmz user:");
-      filmzPass = prompt("filmz pass:");
-      GM_setValue("filmz.user", filmzUser);
-      GM_setValue("filmz.pass", filmzPass);
-    } else {
-      filmzUser = GM_getValue("filmz.user");
-      filmzPass = GM_getValue("filmz.pass");
-      console.log("filmz user and pass found and set.");
-    }
-    let headers = new Headers();
-    console.log("credentials found: " + filmzUser + ", " + filmzPass);
-    headers.append(
-      "Authorization",
-      "Basic " + btoa(filmzUser + ":" + filmzPass)
-    );
-    console.log("new try fetch filmz with basic auth...");
-    fetch(host + "/filmz/find?imdbCode=" + pageMovie.imdbcode, {
-      method: "GET",
-      headers: headers
-    })
-      .then(response => response.json())
-      .then(json => console.log(json));
-  } else {
-    console.log("filmzError: " + filmzError);
-  }
-
+  //dummy data
   pageMovie.score = 0; //getScore();
   console.log("score: " + pageMovie.score);
   //releaseDate, created from basic year if not present/not released yet:
@@ -299,15 +260,34 @@
   }
 
   function getMovie(imdbcode) {
-    GM_xmlhttpRequest({
+    console.log("filmz.user" + GM_getValue("filmz.user"));
+    if (
+      typeof GM_getValue("filmz.user") == "undefined" ||
+      typeof GM_getValue("filmz.pass") == "undefined"
+    ) {
+      console.log("filmz.user und pass nicht gesetzt.");
+      filmzUser = prompt("filmz user:");
+      filmzPass = prompt("filmz pass:");
+      GM_setValue("filmz.user", filmzUser);
+      GM_setValue("filmz.pass", filmzPass);
+    } else {
+      filmzUser = GM_getValue("filmz.user");
+      filmzPass = GM_getValue("filmz.pass");
+      console.log("filmz user and pass found and set.");
+    }
+    let headers = new Headers();
+    console.log("credentials found: " + filmzUser + ", " + filmzPass);
+    headers.append(
+      "Authorization",
+      "Basic " + btoa(filmzUser + ":" + filmzPass)
+    );
+    console.log("new try fetch filmz with basic auth...");
+    fetch(host + "/filmz/find?imdbCode=" + pageMovie.imdbcode, {
       method: "GET",
-      url: host + "/filmz/find?imdbCode=" + imdbcode,
-      headers: {
-        "User-Agent": "monkeyagent",
-        Accept: "application/json"
-      },
-      onload: processGetMovieResult
-    });
+      headers: headers
+    })
+      .then(response => response.json())
+      .then(json => console.log(json));
   }
 
   //data:"imdbCode=" + imdbcode
@@ -316,6 +296,7 @@
   /**/
 
   function addMovie() {
+    /*
     document.getElementById("addButton").disabled = true;
     console.log(pageMovie.score);
     GM_xmlhttpRequest({
@@ -338,6 +319,7 @@
       },
       onload: processAddMovieResponse
     });
+    */
   }
 
   function createJsonResponse(result) {
@@ -424,6 +406,10 @@
       ) {
         pageMovie.namedeutsch = pageMovie.nameoriginal;
       }
+      let themoviedbNameDeutsch = document.querySelector(".themoviedb-name");
+      themoviedbNameDeutsch.innerHTML = pageMovie.namedeutsch;
+      let themoviedbNameOrig = document.querySelector(".themoviedb-nameorig");
+      themoviedbNameOrig.innerHTML = pageMovie.nameoriginal;
       console.log("theMovieDb name_deutsch: " + pageMovie.namedeutsch);
       pageMovie.score = response.movie_results[0].vote_average;
       console.log("theMovieDb score: " + pageMovie.score);
@@ -576,20 +562,6 @@
       },
       onload: processUpdateMovieResult
     });
-  }
-
-  function processAddMovieResponse(response) {
-    var jsonResponse = JSON.parse(response.responseText);
-    clearMovieDivs();
-    //clearSocialDiv();
-    if (jsonResponse.nameDeutsch) {
-      createUpdateForm();
-      populateUpdateForm(jsonResponse);
-    } else if (jsonResponse.code) {
-      showError(jsonResponse.message);
-    } else {
-      console.log("nothing found to display");
-    }
   }
 
   function showError(error) {
