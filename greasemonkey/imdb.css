@@ -22,7 +22,7 @@
   background: red;
 }
 .omdb-name {
-  background: gold;
+  /* background: gold;*/
 }
 .omdb-rating {
   background: yellow;
@@ -35,11 +35,11 @@
 }
 
 .loader {
-  border: 4px solid #f3f3f3 !important;
-  border-top: 4px solid #646464 !important;
+  border: 2px solid #f3f3f3 !important;
+  border-top: 2px solid #646464 !important;
   border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  width: 1ch;
+  height: 1ch;
   animation: spin 2s linear infinite;
 }
 
