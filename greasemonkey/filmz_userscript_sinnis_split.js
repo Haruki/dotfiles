@@ -285,9 +285,24 @@
     fetch(host + "/filmz/find?imdbCode=" + pageMovie.imdbcode, {
       method: "GET",
       headers: headers
-    })
-      .then(response => response.json())
-      .then(json => console.log(json));
+    }).then(response => {
+      console.log("filmz response: " + response.status);
+      if (response.ok) {
+        console.log("resonse ok..setting filmz data");
+        response.json().then(data => {
+          document.querySelector(".filmz-name").innerHTML = data.nameDeutsch;
+          document.querySelector(".filmz-seen").innerHTML =
+            "<input id='filmz-seen' type='checkbox' />";
+          let seen = response.seen;
+          if (seen) {
+            document.querySelector("#filmz-seen").checked = true;
+          }
+        });
+      } else {
+        this.messageDiv.innerHTML =
+          "Filmz request Failed. Code: " + response.status;
+      }
+    });
   }
 
   //data:"imdbCode=" + imdbcode
