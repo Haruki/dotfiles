@@ -233,8 +233,6 @@ function processTheMovieDbData(result) {
       this.movie = true;
       pageMovie.namedeutsch = response.movie_results[0].name;
       pageMovie.nameoriginal = response.movie_results[0].original_title;
-      pageMovie.score = response.movie_results[0].vote_average;
-      console.log("theMovieDb score: " + pageMovie.score);
       pageMovie.releasedate = new Date(response.movie_results[0].release_date);
       console.log("theMovieDb release_date: " + pageMovie.releasedate);
     } else if (response.tv_results[0]) {
@@ -246,8 +244,6 @@ function processTheMovieDbData(result) {
       );
       pageMovie.namedeutsch = response.tv_results[0].name;
       pageMovie.nameoriginal = response.tv_results[0].original_name;
-      pageMovie.score = response.tv_results[0].vote_average;
-      console.log("theMovieDb score: " + pageMovie.score);
       pageMovie.releasedate = new Date(response.tv_results[0].first_air_date);
       console.log("theMovieDb release_date: " + pageMovie.releasedate);
     } else {
@@ -261,11 +257,11 @@ function processTheMovieDbData(result) {
     ) {
       pageMovie.namedeutsch = pageMovie.nameoriginal;
     }
-    let themoviedbNameDeutsch = document.querySelector(".themoviedb-name");
-    themoviedbNameDeutsch.innerHTML = pageMovie.namedeutsch;
-    let themoviedbNameOrig = document.querySelector(".themoviedb-nameorig");
-    themoviedbNameOrig.innerHTML = pageMovie.nameoriginal;
-    console.log("theMovieDb name_deutsch: " + pageMovie.namedeutsch);
+    document.querySelector(".themoviedb-name").innerHTML =
+      pageMovie.namedeutsch;
+    document.querySelector(".themoviedb-nameorig").innerHTML =
+      pageMovie.nameoriginal;
+    document.querySelector(".omdb-rating").innerHTML = pageMovie.score;
   });
   /*
 
