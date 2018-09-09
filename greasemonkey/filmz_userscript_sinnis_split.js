@@ -46,7 +46,7 @@ console.log("got imdbcode");
 console.log(pageMovie.imdbcode);
 
 //dummy data
-pageMovie.score = 0; //getScore();
+pageMovie.score = getImdbScore();
 console.log("score: " + pageMovie.score);
 //releaseDate, created from basic year if not present/not released yet:
 pageMovie.releasedate = new Date(); //getReleaseDate(getReleaseYear(),"january",1);
@@ -104,6 +104,17 @@ function getImdbCode() {
   var codeStartIndex = imdbcode.indexOf("/tt") + 3;
   var codeEndIndex = codeStartIndex + 7;
   return imdbcode.substring(codeStartIndex, codeEndIndex);
+}
+
+function getImdbScore() {
+  let score = document.querySelector(".ratingValue strong span").innerHTML;
+  console.log("type of score: " + typeof score);
+  if (typeof score != "string") {
+    return 0;
+  } else {
+    score = score.replace(",", ".");
+    return parseFloat(score);
+  }
 }
 
 //https://api.themoviedb.org/3/find/tt0306414?api_key=caf9f8363a15942e96e2678c36b80373&language=en-US&external_source=imdb_id
@@ -222,9 +233,9 @@ function processTheMovieDbData(result) {
       this.movie = true;
       pageMovie.namedeutsch = response.movie_results[0].name;
       pageMovie.nameoriginal = response.movie_results[0].original_title;
-      pageMovie.score = response.tv_results[0].vote_average;
+      pageMovie.score = response.movie_results[0].vote_average;
       console.log("theMovieDb score: " + pageMovie.score);
-      pageMovie.releasedate = new Date(response.tv_results[0].release_date);
+      pageMovie.releasedate = new Date(response.movie_results[0].release_date);
       console.log("theMovieDb release_date: " + pageMovie.releasedate);
     } else if (response.tv_results[0]) {
       console.log("Serie!");
