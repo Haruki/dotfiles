@@ -1,4 +1,3 @@
-//(async function() {
 //externes CSS einbinden (Siehe GM_addStyle @resource und GM_getResourceText im header)
 var newCSS = GM_getResourceText("customCSS");
 GM_addStyle(newCSS);
@@ -10,58 +9,8 @@ if (window.top != window.self) {
 }
 
 //config:
-var host = "https://filmz.pimpelkram.com";
-var themoviedbhost = "https://api.themoviedb.org";
-
-console.log("starting...");
-var socialDivElement = clearSocialDiv();
-socialDivElement.innerHTML = `
-      <div class="imdb-container">
-
-        <div class="filmz-name">leer alskdjf lasdkf alskd </div>
-        <div class="filmz-seen"><input type="checkbox" /> </div>
-
-
-        <div class="omdb-name"><div class="loader"></div></div>
-        <div class="omdb-rating">7,4</div>
-        <div class="themoviedb-name">themoviedb name blah la la la </div>
-        <div class="themoviedb-nameorig">the movie db fancy orig name</div>
-
-    </div>
-  `;
-var movieFormDiv = document.getElementById("movieForm");
-var messageDiv = document.getElementById("message");
-
-var movieid;
-
-//bestimmt, ob es sich um einen film oder um eine serie handelt.
-var movie = true;
-
-//this object collects all relevant data of the current movie.
-var pageMovie = new Object();
-//collect movie essential infos:
-//imdbcode:
-pageMovie.imdbcode = getImdbCode();
-console.log("got imdbcode");
-console.log(pageMovie.imdbcode);
-
-//dummy data
-pageMovie.score = getImdbScore();
-console.log("score: " + pageMovie.score);
-//releaseDate, created from basic year if not present/not released yet:
-pageMovie.releasedate = new Date(); //getReleaseDate(getReleaseYear(),"january",1);
-console.log(pageMovie.releasedate);
-pageMovie.namedeutsch = "test"; //getNameDeutsch();
-console.log(pageMovie.namedeutsch);
-pageMovie.nameoriginal = "test"; //getNameOriginal(pageMovie.namedeutsch);
-console.log(pageMovie.nameoriginal);
-pageMovie.log = log;
-pageMovie.log();
-
-getTheMovieDbData(pageMovie.imdbcode);
-getMovie(pageMovie.imdbcode);
-
-console.log("end...");
+let host = "https://filmz.pimpelkram.com";
+let themoviedbhost = "https://api.themoviedb.org";
 
 //======================= functions ===========================//
 
@@ -116,6 +65,14 @@ function getImdbScore() {
     return parseFloat(score);
   }
 }
+
+const getNameDeutsch = () => {
+  console.log("getting nameDeutsch");
+  let nameDeutsch = document.querySelector(".title_wrapper h1").childNodes[0]
+    .nodeValue;
+  console.log("nameDeutschTest: " + nameDeutsch);
+  return nameDeutsch;
+};
 
 //https://api.themoviedb.org/3/find/tt0306414?api_key=caf9f8363a15942e96e2678c36b80373&language=en-US&external_source=imdb_id
 function getTheMovieDbData(imdbcode) {
@@ -231,7 +188,6 @@ function processTheMovieDbData(result) {
     if (response.movie_results[0]) {
       console.log("Film!!");
       this.movie = true;
-      pageMovie.namedeutsch = response.movie_results[0].name;
       pageMovie.nameoriginal = response.movie_results[0].original_title;
       pageMovie.releasedate = new Date(response.movie_results[0].release_date);
       console.log("theMovieDb release_date: " + pageMovie.releasedate);
@@ -242,7 +198,6 @@ function processTheMovieDbData(result) {
         socialDivElement,
         document.querySelector("#top-rated-episodes-rhs")
       );
-      pageMovie.namedeutsch = response.tv_results[0].name;
       pageMovie.nameoriginal = response.tv_results[0].original_name;
       pageMovie.releasedate = new Date(response.tv_results[0].first_air_date);
       console.log("theMovieDb release_date: " + pageMovie.releasedate);
@@ -251,17 +206,12 @@ function processTheMovieDbData(result) {
       return;
     }
     console.log("theMovieDb name_original: " + pageMovie.nameoriginal);
-    if (
-      typeof pageMovie.namedeutsch == "undefined" ||
-      pageMovie.namedeutsch.length == 0
-    ) {
-      pageMovie.namedeutsch = pageMovie.nameoriginal;
-    }
     document.querySelector(".themoviedb-name").innerHTML =
       pageMovie.namedeutsch;
     document.querySelector(".themoviedb-nameorig").innerHTML =
       pageMovie.nameoriginal;
-    document.querySelector(".omdb-rating").innerHTML = pageMovie.score;
+    document.querySelector(".page-rating").innerHTML = pageMovie.score;
+    document.querySelector(".page-name").innerHTML = pageMovie.namedeutsch;
   });
   /*
 
@@ -280,3 +230,55 @@ function processTheMovieDbData(result) {
     });
     */
 //})();
+
+//************ Program************ */
+
+console.log("starting...");
+let socialDivElement = clearSocialDiv();
+socialDivElement.innerHTML = `
+      <div class="imdb-container">
+
+        <div class="filmz-name">leer alskdjf lasdkf alskd </div>
+        <div class="filmz-seen"><input type="checkbox" /> </div>
+
+
+        <div class="page-name"></div>
+        <div class="page-rating"></div>
+        <div class="themoviedb-name">themoviedb name blah la la la </div>
+        <div class="themoviedb-nameorig">the movie db fancy orig name</div>
+
+    </div>
+  `;
+let movieFormDiv = document.getElementById("movieForm");
+let messageDiv = document.getElementById("message");
+
+let movieid;
+
+//bestimmt, ob es sich um einen film oder um eine serie handelt.
+let movie = true;
+
+//this object collects all relevant data of the current movie.
+let pageMovie = new Object();
+//collect movie essential infos:
+//imdbcode:
+pageMovie.imdbcode = getImdbCode();
+console.log("got imdbcode");
+console.log(pageMovie.imdbcode);
+
+//dummy data
+pageMovie.score = getImdbScore();
+console.log("score: " + pageMovie.score);
+//releaseDate, created from basic year if not present/not released yet:
+pageMovie.releasedate = new Date(); //getReleaseDate(getReleaseYear(),"january",1);
+console.log(pageMovie.releasedate);
+pageMovie.namedeutsch = getNameDeutsch();
+console.log(pageMovie.namedeutsch);
+pageMovie.nameoriginal = "test";
+console.log(pageMovie.nameoriginal);
+pageMovie.log = log;
+pageMovie.log();
+
+getTheMovieDbData(pageMovie.imdbcode);
+getMovie(pageMovie.imdbcode);
+
+console.log("end...");
