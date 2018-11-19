@@ -123,6 +123,32 @@ const addMovie = () => {
   }).then(response => {
     console.log("response.ok " + response.ok);
     console.log("responst.status " + response.status);
+    processGetMovieResponse(response);
+  });
+};
+
+/**
+ * Setzt einen Film auf 'gesehen'.
+ * @param {*}
+ */
+const toggleSeen = movieId => {
+  let filmzUser, filmzPass;
+  filmzUser = GM_getValue("filmz.user");
+  filmzPass = GM_getValue("filmz.pass");
+  let headers = new Headers();
+  headers.append("Authorization", "Basic " + btoa(filmzUser + ":" + filmzPass));
+  fetch(host + "/filmz/" + movieId + "/seen", {
+    method: "PUT",
+    headers: headers
+  }).then(response => {
+    console.log("toggleSeen response.status: " + response.status);
+    let cb = document.getElementById("filmz-seen");
+    if (response.status === 200) {
+      cb.checked = true;
+      cb.disabled = true;
+    } else {
+      cb.checked = false;
+    }
   });
 };
 
@@ -138,6 +164,9 @@ const processGetMovieResponse = response => {
       document.querySelector(".filmz-name").innerHTML = data.nameDeutsch;
       document.querySelector(".filmz-seen").innerHTML =
         "<input id='filmz-seen' type='checkbox' />";
+      document
+        .getElementById("filmz-seen")
+        .addEventListener("click", () => toggleSeen(data.movieId));
       if (data.seen) {
         document.querySelector("#filmz-seen").checked = true;
       }
