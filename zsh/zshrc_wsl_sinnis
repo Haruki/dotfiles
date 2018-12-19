@@ -36,3 +36,4 @@ export GOPATH=~/go
 export PATH=$PATH:$GOPATH/bin
 export TMPDIR='/mnt/c/Users/borsutzha/AppData/Local/Temp'
 
+source ~/qmk_utils/activate_wsl.sh
