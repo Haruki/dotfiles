@@ -10,9 +10,6 @@ set number relativenumber
 set wildmode=longest,list,full
 set wildmenu
 
-set wildmode=longest,list,full
-set wildmenu
-
 augroup numbertoggle
   autocmd!
   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
