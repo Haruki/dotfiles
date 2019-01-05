@@ -9,122 +9,129 @@ let themoviedbhost = "https://api.themoviedb.org";
 //======================= functions ===========================//
 
 function log(obj) {
-  console.log("imdbcode: " + obj.imdbcode);
-  console.log("score: " + obj.score);
-  console.log("releaseDate: " + obj.releasedate);
-  console.log("nameDeutsch: " + obj.namedeutsch);
-  console.log("nameOriginal: " + obj.nameoriginal);
+    console.log("imdbcode: " + obj.imdbcode);
+    console.log("score: " + obj.score);
+    console.log("releaseDate: " + obj.releasedate);
+    console.log("nameDeutsch: " + obj.namedeutsch);
+    console.log("nameOriginal: " + obj.nameoriginal);
 }
 
 const clearSocialDiv = () => {
-  return document.querySelector("div .mini-article");
+    return document.querySelector("div .mini-article");
 };
 
 function getImdbCode() {
-  var imdbcode = window.location.href;
-  var slashIndex = imdbcode.lastIndexOf("/");
-  var codeStartIndex = imdbcode.indexOf("/tt") + 3;
-  var codeEndIndex = codeStartIndex + 7;
-  return imdbcode.substring(codeStartIndex, codeEndIndex);
+    var imdbcode = window.location.href;
+    var slashIndex = imdbcode.lastIndexOf("/");
+    var codeStartIndex = imdbcode.indexOf("/tt") + 3;
+    var codeEndIndex = codeStartIndex + 7;
+    return imdbcode.substring(codeStartIndex, codeEndIndex);
 }
 
 function getImdbScore() {
-  let score = document.querySelector(".ratingValue strong span").innerHTML;
-  if (typeof score != "string") {
-    return 0;
-  } else {
-    score = score.replace(",", ".");
-    return parseFloat(score);
-  }
+    let score = document.querySelector(".ratingValue strong span").innerHTML;
+    if (typeof score != "string") {
+        return 0;
+    } else {
+        score = score.replace(",", ".");
+        return parseFloat(score);
+    }
 }
 
 const getNameDeutsch = () => {
-  let nameDeutsch = document.querySelector(".title_wrapper h1").childNodes[0]
-    .nodeValue;
-  return nameDeutsch;
+    let nameDeutsch = document.querySelector(".title_wrapper h1").childNodes[0]
+        .nodeValue;
+    return nameDeutsch;
 };
 
 const processTheMovieDbData = result => {
-  console.log("theMovieDb fetching data...");
-  result.json().then(response => {
-    //Datenvariablen fuer movie daten fuellen:
-    if (response.movie_results[0]) {
-      console.log("Film!!");
-      this.movie = true;
-      pageMovie.nameoriginal = response.movie_results[0].original_title;
-      pageMovie.releasedate = new Date(response.movie_results[0].release_date);
-      console.log("theMovieDb release_date: " + pageMovie.releasedate);
-    } else if (response.tv_results[0]) {
-      console.log("Serie!");
-      this.movie = false;
-      socialDivElement.parentElement.insertBefore(
-        socialDivElement,
-        document.querySelector("#top-rated-episodes-rhs")
-      );
-      pageMovie.nameoriginal = response.tv_results[0].original_name;
-      pageMovie.releasedate = new Date(response.tv_results[0].first_air_date);
-      console.log("theMovieDb release_date: " + pageMovie.releasedate);
-    } else {
-      console.log("Unbekannt: keine serie oder film!");
-      return;
-    }
-    console.log("theMovieDb name_original: " + pageMovie.nameoriginal);
-    document.querySelector(".themoviedb-name").innerHTML =
-      pageMovie.namedeutsch;
-    document.querySelector(".themoviedb-nameorig").innerHTML =
-      pageMovie.nameoriginal;
-    document.querySelector(".page-rating").innerHTML = pageMovie.score;
-    document.querySelector(".page-name").innerHTML = pageMovie.namedeutsch;
-  });
+    console.log("theMovieDb fetching data...");
+    result.json().then(response => {
+        //Datenvariablen fuer movie daten fuellen:
+        if (response.movie_results[0]) {
+            console.log("Film!!");
+            this.movie = true;
+            pageMovie.nameoriginal = response.movie_results[0].original_title;
+            pageMovie.releasedate = new Date(
+                response.movie_results[0].release_date
+            );
+            console.log("theMovieDb release_date: " + pageMovie.releasedate);
+        } else if (response.tv_results[0]) {
+            console.log("Serie!");
+            this.movie = false;
+            socialDivElement.parentElement.insertBefore(
+                socialDivElement,
+                document.querySelector("#top-rated-episodes-rhs")
+            );
+            pageMovie.nameoriginal = response.tv_results[0].original_name;
+            pageMovie.releasedate = new Date(
+                response.tv_results[0].first_air_date
+            );
+            console.log("theMovieDb release_date: " + pageMovie.releasedate);
+        } else {
+            console.log("Unbekannt: keine serie oder film!");
+            return;
+        }
+        console.log("theMovieDb name_original: " + pageMovie.nameoriginal);
+        document.querySelector(".themoviedb-name").innerHTML =
+            pageMovie.namedeutsch;
+        document.querySelector(".themoviedb-nameorig").innerHTML =
+            pageMovie.nameoriginal;
+        document.querySelector(".page-rating").innerHTML = pageMovie.score;
+        document.querySelector(".page-name").innerHTML = pageMovie.namedeutsch;
+    });
 };
 
 //https://api.themoviedb.org/3/find/tt0306414?api_key=caf9f8363a15942e96e2678c36b80373&language=en-US&external_source=imdb_id
 const getTheMovieDbData = imdbcode => {
-  fetch(
-    themoviedbhost +
-      "/3/find/tt" +
-      imdbcode +
-      "?api_key=caf9f8363a15942e96e2678c36b80373&language=en-US&external_source=imdb_id",
-    {
-      method: "GET"
-    }
-  ).then(response => {
-    console.log(
-      "processing themoviedb response..., status: " + response.status
-    );
-    processTheMovieDbData(response);
-  });
+    fetch(
+        themoviedbhost +
+            "/3/find/tt" +
+            imdbcode +
+            "?api_key=caf9f8363a15942e96e2678c36b80373&language=en-US&external_source=imdb_id",
+        {
+            method: "GET"
+        }
+    ).then(response => {
+        console.log(
+            "processing themoviedb response..., status: " + response.status
+        );
+        processTheMovieDbData(response);
+    });
 };
 
 const addMovie = () => {
-  pageMovie.releasedate = pageMovie.releasedate.getTime();
-  log(pageMovie);
-  let filmzUser, filmzPass;
-  filmzUser = GM_getValue("filmz.user");
-  filmzPass = GM_getValue("filmz.pass");
-  let headers = new Headers();
-  headers.append("Authorization", "Basic " + btoa(filmzUser + ":" + filmzPass));
-  headers.append("Content-Type", "application/x-www-form-urlencoded");
-  document.getElementById("addButton").disabled = true;
-  fetch(host + "/filmz", {
-    method: "POST",
-    headers: headers,
-    body:
-      "imdbCode=" +
-      pageMovie.imdbcode +
-      "&imdbRating=" +
-      pageMovie.score +
-      "&releaseDate=" +
-      pageMovie.releasedate +
-      "&nameDeutsch=" +
-      pageMovie.namedeutsch +
-      "&nameOriginal=" +
-      pageMovie.nameoriginal
-  }).then(response => {
-    console.log("response.ok " + response.ok);
-    console.log("responst.status " + response.status);
-    processGetMovieResponse(response);
-  });
+    pageMovie.releasedate = pageMovie.releasedate.getTime();
+    log(pageMovie);
+    let filmzUser, filmzPass;
+    filmzUser = GM_getValue("filmz.user");
+    filmzPass = GM_getValue("filmz.pass");
+    let headers = new Headers();
+    headers.append(
+        "Authorization",
+        "Basic " + btoa(filmzUser + ":" + filmzPass)
+    );
+    headers.append("Content-Type", "application/x-www-form-urlencoded");
+    document.getElementById("addButton").disabled = true;
+    fetch(host + "/filmz", {
+        method: "POST",
+        headers: headers,
+        body:
+            "imdbCode=" +
+            pageMovie.imdbcode +
+            "&imdbRating=" +
+            pageMovie.score +
+            "&releaseDate=" +
+            pageMovie.releasedate +
+            "&nameDeutsch=" +
+            pageMovie.namedeutsch +
+            "&nameOriginal=" +
+            pageMovie.nameoriginal
+    }).then(response => {
+        console.log("response.ok " + response.ok);
+        console.log("responst.status " + response.status);
+        processGetMovieResponse(response);
+    });
 };
 
 /**
@@ -132,24 +139,27 @@ const addMovie = () => {
  * @param {*}
  */
 const toggleSeen = movieId => {
-  let filmzUser, filmzPass;
-  filmzUser = GM_getValue("filmz.user");
-  filmzPass = GM_getValue("filmz.pass");
-  let headers = new Headers();
-  headers.append("Authorization", "Basic " + btoa(filmzUser + ":" + filmzPass));
-  fetch(host + "/filmz/" + movieId + "/seen", {
-    method: "PUT",
-    headers: headers
-  }).then(response => {
-    console.log("toggleSeen response.status: " + response.status);
-    let cb = document.getElementById("filmz-seen");
-    if (response.status === 200) {
-      cb.checked = true;
-      cb.disabled = true;
-    } else {
-      cb.checked = false;
-    }
-  });
+    let filmzUser, filmzPass;
+    filmzUser = GM_getValue("filmz.user");
+    filmzPass = GM_getValue("filmz.pass");
+    let headers = new Headers();
+    headers.append(
+        "Authorization",
+        "Basic " + btoa(filmzUser + ":" + filmzPass)
+    );
+    fetch(host + "/filmz/" + movieId + "/seen", {
+        method: "PUT",
+        headers: headers
+    }).then(response => {
+        console.log("toggleSeen response.status: " + response.status);
+        let cb = document.getElementById("filmz-seen");
+        if (response.status === 200) {
+            cb.checked = true;
+            cb.disabled = true;
+        } else {
+            cb.checked = false;
+        }
+    });
 };
 
 /**
@@ -157,53 +167,56 @@ const toggleSeen = movieId => {
  * @param {*} response objekt mit status und json (content)
  */
 const processGetMovieResponse = response => {
-  console.log("filmz response: " + response.status);
-  if (response.ok) {
-    console.log("resonse ok..setting filmz data");
-    response.json().then(data => {
-      document.querySelector(".filmz-name").innerHTML = data.nameDeutsch;
-      document.querySelector(".filmz-seen").innerHTML =
-        "<input id='filmz-seen' type='checkbox' />";
-      document
-        .getElementById("filmz-seen")
-        .addEventListener("click", () => toggleSeen(data.movieId));
-      if (data.seen) {
-        document.querySelector("#filmz-seen").checked = true;
-      }
-    });
-  } else {
-    document.querySelector(".filmz-name").innerHTML = `
+    console.log("filmz response: " + response.status);
+    if (response.ok) {
+        console.log("resonse ok..setting filmz data");
+        response.json().then(data => {
+            document.querySelector(".filmz-name").innerHTML = data.nameDeutsch;
+            document.querySelector(".filmz-seen").innerHTML =
+                "<input id='filmz-seen' type='checkbox' />";
+            document
+                .getElementById("filmz-seen")
+                .addEventListener("click", () => toggleSeen(data.movieId));
+            if (data.seen) {
+                document.querySelector("#filmz-seen").checked = true;
+            }
+        });
+    } else {
+        document.querySelector(".filmz-name").innerHTML = `
       Filmz request Failed. Code: ${response.status} 
       <button type=button id=addButton>add Movie</button>
       `;
-    document
-      .getElementById("addButton")
-      .addEventListener("click", () => addMovie());
-  }
+        document
+            .getElementById("addButton")
+            .addEventListener("click", () => addMovie());
+    }
 };
 
 const getMovie = imdbcode => {
-  let filmzUser, filmzPass;
-  if (
-    typeof GM_getValue("filmz.user") == "undefined" ||
-    typeof GM_getValue("filmz.pass") == "undefined"
-  ) {
-    filmzUser = prompt("filmz user:");
-    filmzPass = prompt("filmz pass:");
-    GM_setValue("filmz.user", filmzUser);
-    GM_setValue("filmz.pass", filmzPass);
-  } else {
-    filmzUser = GM_getValue("filmz.user");
-    filmzPass = GM_getValue("filmz.pass");
-  }
-  let headers = new Headers();
-  headers.append("Authorization", "Basic " + btoa(filmzUser + ":" + filmzPass));
-  fetch(host + "/filmz/find?imdbCode=" + pageMovie.imdbcode, {
-    method: "GET",
-    headers: headers
-  }).then(response => {
-    processGetMovieResponse(response);
-  });
+    let filmzUser, filmzPass;
+    if (
+        typeof GM_getValue("filmz.user") == "undefined" ||
+        typeof GM_getValue("filmz.pass") == "undefined"
+    ) {
+        filmzUser = prompt("filmz user:");
+        filmzPass = prompt("filmz pass:");
+        GM_setValue("filmz.user", filmzUser);
+        GM_setValue("filmz.pass", filmzPass);
+    } else {
+        filmzUser = GM_getValue("filmz.user");
+        filmzPass = GM_getValue("filmz.pass");
+    }
+    let headers = new Headers();
+    headers.append(
+        "Authorization",
+        "Basic " + btoa(filmzUser + ":" + filmzPass)
+    );
+    fetch(host + "/filmz/find?imdbCode=" + pageMovie.imdbcode, {
+        method: "GET",
+        headers: headers
+    }).then(response => {
+        processGetMovieResponse(response);
+    });
 };
 
 //data:"imdbCode=" + imdbcode
