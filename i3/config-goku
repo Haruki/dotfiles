@@ -29,7 +29,7 @@ hide_edge_borders both
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
+bindsym $mod+Return exec "termite --exec='/usr/bin/zsh --login'"
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -225,7 +225,7 @@ bindsym $mod+n exec "/usr/bin/thunar"
 bindsym $mod+m exec "/usr/local/bin/switch-audio-port"
 
 # Autostart apps
-exec --no-startup-id feh --bg-scale /home/goku/Dropbox/floating_neon_circuitboard_upscaled.png 
+exec --no-startup-id feh --bg-scale /mnt/d/Dropbox/floating_neon_circuitboard_upscaled.png 
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id "compton -cC"
 exec --no-startup-id nm-applet

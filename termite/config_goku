@@ -38,4 +38,5 @@ color14 = #d6dbac
 color7  = #efefef
 color15 = #efefef
 
-
+[options]
+font = Monospace 9
