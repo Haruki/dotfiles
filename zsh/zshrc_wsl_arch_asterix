@@ -9,6 +9,9 @@ export DISPLAY=:0
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
+#Wenn ein Nerdfont verwendet wird muss der Mode gesetzt werden für passende UNICODE Icons:
+POWERLEVEL9K_MODE='nerdfont-complete'
+
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir vcs)
 #POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(icons_test)
 # removed 'dir' from left prompt because of background opacity error
