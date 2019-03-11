@@ -21,3 +21,4 @@ eval $(/mnt/c/data/coding/weasel-pageant-1.1/weasel-pageant -r)
 
 export TMPDIR='/mnt/c/Users/borsutzha/AppData/Local/Temp'
 
+eval $( dircolors -b $HOME/LS_COLORS/LS_COLORS )
