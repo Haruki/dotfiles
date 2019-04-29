@@ -44,3 +44,6 @@ eval "$(fasd --init auto)"
 # requires 'yay -S lscolors-git'
 . /usr/share/LS_COLORS/dircolors.sh
 
+bindkey -v
+alias ssh='TERM=xterm ssh'
+
