@@ -1,0 +1,2 @@
+alias slsh='find . -maxdepth 1 -type f | sort -R | sxiv -i -s f -S 5'
+
