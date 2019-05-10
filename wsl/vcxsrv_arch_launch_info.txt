@@ -1,0 +1,5 @@
+Arch.exe starten und mit VcXSrv (Windows X-Server) verwenden mit i3:
+1. VcXSrv starten (one large window)
+2. Arch.exe starten:  Arch run "cd /home/walter && zsh -c 'source /home/walter/.zshrc && i3'"
+
+Mit dieser Variante ist kein Skript auf Arch seite notwendig und es wird zsh erzwungen.
