@@ -38,3 +38,4 @@ eval "$(fasd --init auto)"
 
 eval $( dircolors -b $HOME/LS_COLORS/LS_COLORS )
 
+source .aliases
