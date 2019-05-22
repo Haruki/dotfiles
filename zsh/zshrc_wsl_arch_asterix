@@ -47,3 +47,5 @@ eval "$(fasd --init auto)"
 bindkey -v
 alias ssh='TERM=xterm ssh'
 
+source ~/qmk_utils/activate_wsl.sh
+
