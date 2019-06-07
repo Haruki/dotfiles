@@ -35,8 +35,10 @@ grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak  | sed '/--/d' > /etc/p
 
 # pacman basic packages
 pacstrap /mnt base base-devel bash-completion
+
 # intel:
-pacstrap /mnt intel-ucode
+#pacstrap /mnt intel-ucode
+
 # basic work stuff
 pacstrap /mnt vim neovim git
 # efi  stuff
