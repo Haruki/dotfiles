@@ -42,5 +42,18 @@ pacstrap /mnt vim neovim git
 # efi  stuff
 pacstrap /mnt efibootmgr dosfstools gptfdisk
 
+# wlan
+# pacstrap /mnt wpa_supplicant dialog
 
+
+
+
+# fstab
+genfstab -p /mnt/ > /mnt/etc/fstab
+
+
+
+
+
+echo DOTO: fstab relatime -> noatime + discard
 
