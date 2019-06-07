@@ -30,3 +30,29 @@ echo "::1		localhost.localdomain		localhost" >> /etc/hosts
 
 
 cat /etc/pacman.conf  | sed '/\[multilib\]/{n;s/#Include/Include/}' | sed '/\[multilib\]/a SigLevel = PackageRequired TrustedOnly'
+
+# update packagelist
+pacman -Sy
+
+# initramfs
+mkinitcpio -p linux
+
+# root password
+passwd
+
+
+# bootloader GRUB
+
+pacman -S grub
+
+# BIOS
+# grub-install /dev/sda
+
+#EFI
+grub-install --target=x86_64 --efi-directory=/boot --bootloader-id=grub
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
+echo "now reboot into new installation"
+exit
+
