@@ -29,3 +29,4 @@ echo "::1		localhost.localdomain		localhost" >> /etc/hosts
 
 
 
+cat /etc/pacman.conf  | sed '/\[multilib\]/{n;s/#Include/Include/}' | sed '/\[multilib\]/a SigLevel = PackageRequired TrustedOnly'
