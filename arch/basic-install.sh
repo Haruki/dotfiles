@@ -57,5 +57,5 @@ genfstab -p /mnt/ > /mnt/etc/fstab
 
 
 
-echo DOTO: fstab relatime -> noatime + discard
+echo "DOTO: fstab relatime -> noatime + discard"
 
