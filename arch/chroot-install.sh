@@ -53,6 +53,16 @@ grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
+#network config
+
+cp /etc/netctl/examples/ethernet-dhcp /etc/netctl
+#in der Vorlage eht0 aendern in korrekten interace name
+sed -i 's/eth0/'$(ip link | grep 2: | awk '{print substr($2, 1, length($2)-1)}')'/' /etc/netctl/ethernet-dhcp
+
+netctl enable ethernet-dhcp
+
+
+
 echo "now reboot into new installation"
 exit
 
