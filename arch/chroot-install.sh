@@ -49,7 +49,7 @@ pacman -S grub
 # grub-install /dev/sda
 
 #EFI
-grub-install --target=x86_64 --efi-directory=/boot --bootloader-id=grub
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
