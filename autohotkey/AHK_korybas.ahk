@@ -1,3 +1,9 @@
+SetTitleMatchMode, 2
+
+::bor::hlb\borsutzha
+Return
+
+
 ;~F8::
 ;if (WinActive("Termeros")) {
 ;  Send ^{E}
@@ -16,7 +22,7 @@
 ;  Send ^{e}
 ;  return
 
-SetTitleMatchMode, 2
+
 ^k::
 	WinActivate, PL/SQL
 Return
