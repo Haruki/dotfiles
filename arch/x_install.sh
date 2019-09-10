@@ -4,7 +4,8 @@
 #both basic installers have been executed
 
 pacman -Sy
-pacman -S xorg-server xorg-xinit
+pacman -S xorg-server xorg-xinit libxkbcommon libxkbcommon-x11
+# libxkbcommon wegen fehler bei localctl
 
 #Treiber
 # lspci | grep VGA
