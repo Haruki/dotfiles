@@ -1,0 +1,5 @@
+compton --config /home/walter/.config/compton.conf &
+feh --bg-scale /data/cyber.jpg
+xrdb &
+exec dwm
+
