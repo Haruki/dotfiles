@@ -24,8 +24,22 @@ export TMPDIR='/mnt/c/Users/borsutzha/AppData/Local/Temp'
 
 eval $( dircolors -b $HOME/LS_COLORS/LS_COLORS )
 
-source ~/qmk_utils/activate_wsl.sh
+# source ~/qmk_utils/activate_wsl.sh
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
+
+export EDITOR=/bin/nvim
+
+n()
+{
+    export NNN_TMPFILE=${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.lastd
+
+    nnn "$@"
+
+    if [ -f $NNN_TMPFILE ]; then
+            . $NNN_TMPFILE
+            rm $NNN_TMPFILE
+    fi
+}
