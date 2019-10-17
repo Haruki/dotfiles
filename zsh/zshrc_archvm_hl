@@ -31,3 +31,4 @@ eval $( dircolors -b ~/LS_COLORS/LS_COLORS )
 
 alias ls='ls --color=auto'
 
+VBoxClient-all
