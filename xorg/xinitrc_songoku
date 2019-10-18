@@ -1,0 +1,6 @@
+compton &
+sxhkd &
+feh --bg-scale /home/songoku/Downloads/cyberpunk-skyline.jpg
+trayer --transparent true --tint 0x00000008 --height 20 &
+exec dwm
+
