@@ -43,3 +43,8 @@ n()
             rm $NNN_TMPFILE
     fi
 }
+
+export ORACLE_HOME=/opt/oracle/instantclient_19_3
+export LD_LIBRARY_PATH=$ORACLE_HOME:$LD_LIBRARY_PATH
+export PATH=$ORACLE_HOME:$PATH
+
