@@ -34,7 +34,7 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak  | sed '/--/d' > /etc/pacman.d/mirrorlist
 
 # pacman basic packages
-pacstrap /mnt base base-devel linux bash-completion
+pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient
 
 # intel:
 #pacstrap /mnt intel-ucode
