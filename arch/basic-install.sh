@@ -9,19 +9,19 @@
 
 # create filesystems:
 # EFI:
-mkfs.fat -F 32 -n EFIBOOT /dev/sda1
+#mkfs.fat -F 32 -n EFIBOOT /dev/sda1
 
 # swap and linux:
-mkfs.ext4 -L arch /dev/sda3
-mkswap -L swap /dev/sda2
+#mkfs.ext4 -L arch /dev/sda3
+#mkswap -L swap /dev/sda2
 
 
 #mount (linux + swap + boot)
 
-mount -L arch /mnt
-mkdir -p /mnt/boot
-mount -L EFIBOOT /mnt/boot
-swapon -L swap
+#mount -L arch /mnt
+#mkdir -p /mnt/boot
+#mount -L EFIBOOT /mnt/boot
+#swapon -L swap
 
 
 
@@ -34,7 +34,7 @@ cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
 grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak  | sed '/--/d' > /etc/pacman.d/mirrorlist
 
 # pacman basic packages
-pacstrap /mnt base base-devel bash-completion
+pacstrap /mnt base base-devel linux bash-completion
 
 # intel:
 #pacstrap /mnt intel-ucode
@@ -42,10 +42,10 @@ pacstrap /mnt base base-devel bash-completion
 # basic work stuff
 pacstrap /mnt vim neovim git
 # efi  stuff
-pacstrap /mnt efibootmgr dosfstools gptfdisk
+pacstrap /mnt dosfstools 
 
 # wlan
-# pacstrap /mnt wpa_supplicant dialog
+pacstrap /mnt wpa_supplicant netctl dialog
 
 
 
@@ -54,7 +54,8 @@ pacstrap /mnt efibootmgr dosfstools gptfdisk
 genfstab -p /mnt/ > /mnt/etc/fstab
 
 
-
+#Locale copy. needed by next script to generate locales in arch_chroot
+cat /etc/locale.gen | sed 's/#de_DE/de_DE/' | sed 's/#en_US/en_US/' > /mnt/etc/locale.gen 
 
 
 echo 'DOTO: fstab relatime -> noatime + discard'

@@ -7,13 +7,12 @@
 # further system config:
 
 
-echo archvm > /etc/hostname
+echo riker > /etc/hostname
 
 echo LANG=de_DE.UTF-8 > /etc/locale.conf
 
 
-cat /etc/locale.gen | sed 's/#de_DE/de_DE/' | sed 's/#en_US/en_US/' > /etc/locale.gen 
-
+#/etc/locale.gen wurde im vorherigen script angelegt
 locale-gen
 
 echo KEYMAP=de-latin1-nodeadkeys > /etc/vconsole.conf
@@ -50,6 +49,9 @@ pacman -S grub
 
 #EFI
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
+#BIOS MBR
+#grub-install /dev/sda
+
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
