@@ -1,9 +1,9 @@
 #!/bin/sh
 
 #new standard user:
-useradd -m -g users -s /bin/bash walter
+useradd -m -g users -s /bin/bash riker
 #password
-passwd walter
+passwd riker
 
 #sudo
 pacman -Sy
@@ -13,10 +13,10 @@ pacman -S sudo
 sed -i 's/# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/'   /etc/sudoers 
 
 #user zur gruppe wheel hinzufügen:
-gpasswd -a walter wheel
+gpasswd -a riker wheel
 
 #weitere dienste:
-pacman -S acpid dbus avahi cpus cronie
+pacman -S acpid dbus avahi cups cronie
 
 systemctl enable acpid
 systemctl enable avahi-daemon
