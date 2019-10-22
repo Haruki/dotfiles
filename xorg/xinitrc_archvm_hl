@@ -1,7 +1,7 @@
 compton --config /home/walter/.config/compton.conf &
 feh --bg-scale /data/cyber.jpg
 xrdb &
-trayer --transparent true --tint 0x00000008 &
+trayer --transparent true --tint 0x00000008 --height 20 &
 exec dwm 
 
 
