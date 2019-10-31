@@ -39,4 +39,9 @@ color7  = #efefef
 color15 = #efefef
 
 [options]
-font = Ubuntu Mono derivative Powerline 14
+#font = Ubuntu Mono derivative Powerline 14
+#font = Ubuntu Mono Nerd Font Complete Mono 14
+#font = Ubuntu Mono Bold Italic Nerd Font Complete Mono Windows Compatible 14
+#font = UbuntuMono NF:style=Bold 14
+font = UbuntuMono Nerd Font Mono 14
+
