@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 # Startet den Pulse-Audio Service, falls nicht bereits geschehen
 
 RUNNING=$(ps -A | grep 'pulse' | wc -l)

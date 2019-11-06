@@ -26,4 +26,4 @@ alias ls='ls --color=auto'
 
 export EDITOR=/bin/nvim
 source ~/git_alias.sh
-
+source ~/start_pa.sh
