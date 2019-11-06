@@ -11,14 +11,13 @@ RESULT=""
 while IFS= read -r displayLine
 do
 	FIRST="$(echo $displayLine | grep -Po '^\w*')"
-	RESULT="${RESULT}$FIRST"
 	ACTIVE="$(echo $displayLine | grep -P '\d{3,}x\d{3,}' | wc -l)"
-	if [ ACTIVE = "0" ] 
+	if [ "$ACTIVE" != "0" ] 
 	then
-		echo $FIRST $LAPTOP_OFF
-	else
-		echo $FIRST $LAPTOP_ON
+		RESULT="$RESULT $FIRST $LAPTOP_ON |"
 	fi
 	#echo ${RESULT}
 	#echo ${displayLine}
 done < <(xrandr | grep -P "^\w.*" | grep -v "^[Screen]")
+echo $RESULT
+
