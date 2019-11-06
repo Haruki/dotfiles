@@ -1,0 +1,5 @@
+ctrl + F12
+	bluetoothctl -- connect A4:77:58:00:B6:08
+ctrl + F11
+	systemctl suspend
+
