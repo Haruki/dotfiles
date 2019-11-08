@@ -24,6 +24,10 @@ systemctl enable org.cups.cupsd.service
 systemctl enable cronie
 systemctl enable --now systemd-timesyncd.service
 
+#manuals
+pacman -S man-db man-pages
+mandb
+
 #ggf. hardware clock set
 #hwclock -w
 

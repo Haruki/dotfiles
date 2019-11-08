@@ -40,7 +40,7 @@ pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient
 #pacstrap /mnt intel-ucode
 
 # basic work stuff
-pacstrap /mnt vim neovim git
+pacstrap /mnt vim neovim git wget unzip
 # efi  stuff
 pacstrap /mnt dosfstools 
 
