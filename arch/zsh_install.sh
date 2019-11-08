@@ -6,6 +6,8 @@
 
 sudo pacman -S zsh
 cd ~
+chsh /bin/zsh
+zsh
 
 
 
