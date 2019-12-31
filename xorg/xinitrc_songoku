@@ -1,7 +1,7 @@
 compton &
 sxhkd &
 feh --bg-scale /home/songoku/Downloads/cyberpunk-skyline.jpg
-trayer --transparent true --tint 0x00000008 --height 20 &
+trayer --transparent true --tint 0x00000008 --height 5 &
 ~/dwm_status.sh &
 ~/start_pa.sh &
 exec dwm
