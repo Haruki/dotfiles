@@ -41,3 +41,9 @@ eval $( dircolors -b $HOME/LS_COLORS/LS_COLORS )
 source .aliases
 
 bindkey -v
+source /usr/share/nvm/init-nvm.sh
+
+source /home/homer/.config/broot/launcher/bash/br
+
+alias ssh='TERM=xterm ssh'
+
