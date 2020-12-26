@@ -1,4 +1,6 @@
-export DISPLAY=:0
+#export DISPLAY=:0
+export DISPLAY=127.0.0.1:0.0
+
 
 # Path to your oh-my-zsh installation.
   export ZSH="/home/homer/.oh-my-zsh"
