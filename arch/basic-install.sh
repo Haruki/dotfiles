@@ -45,7 +45,7 @@ pacstrap /mnt vim neovim git wget unzip
 pacstrap /mnt dosfstools 
 
 # wlan
-pacstrap /mnt wpa_supplicant netctl dialog
+pacstrap /mnt wpa_supplicant netctl dialog openssh
 
 
 
