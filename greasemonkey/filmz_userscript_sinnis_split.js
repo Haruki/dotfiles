@@ -3,7 +3,7 @@ var newCSS = GM_getResourceText("customCSS");
 GM_addStyle(newCSS);
 
 //config:
-let host = "https://filmz.pimpelkram.com";
+let host = "https://192.168.0.28:8080";
 let themoviedbhost = "https://api.themoviedb.org";
 
 //======================= functions ===========================//
