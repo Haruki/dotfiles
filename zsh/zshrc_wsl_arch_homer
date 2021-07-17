@@ -49,3 +49,7 @@ source /home/homer/.config/broot/launcher/bash/br
 
 alias ssh='TERM=xterm ssh'
 
+alias ls='exa --icons' 
+
+alias cat='bat'
+
