@@ -12,14 +12,14 @@
 // @exclude			http://www.imdb.com/widget/*
 // @exclude			http://www.imdb.com/title/tt*/_ajax/*
 // @exclude 		http://www.imdb.com/title/tt*//event/*
-// @require         file:///C:/Users/borsutzha/dotfiles/greasemonkey/filmz_userscript_sinnis_split.js
+// @require         file:///C:/Users/Asterix/dotfiles/greasemonkey/filmz_userscript_sinnis_split.js
 // @grant			GM_xmlhttpRequest
 // @grant           GM_setValue
 // @grant           GM_getValue
 // @connect         pimpelkram.com
 // @connect         omdbapi.com
 // @connect         themoviedb.org
-// @resource        customCSS file:///C:/Users/borsutzha/dotfiles/greasemonkey/imdb.css
+// @resource        customCSS file:///C:/Users/Asterix/dotfiles/greasemonkey/imdb.css
 // @grant           GM_addStyle
 // @grant           GM_getResourceText
 // ==/UserScript==
