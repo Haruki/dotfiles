@@ -1,0 +1,6 @@
+#! /bin/zsh
+source ~/.zshrc
+picom -b
+feh --bg-scale /mnt/c/data/Arch_Wallpaper.jpg
+dwm
+
