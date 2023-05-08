@@ -1,32 +1,43 @@
-  export ZSH=/home/homer/.oh-my-zsh
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(os_icon dir rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status vi_mode root_indicator background_jobs history time)
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-
-POWERLEVEL9K_MODE='nerdfont-complete'
-
-ZSH_THEME="powerlevel9k/powerlevel9k"
-
-plugins=(
-  git zsh-syntax-highlighting zsh-autosuggestions
-)
-
-source $ZSH/oh-my-zsh.sh
-eval "$(fasd --init auto)"
-source ~/qmk_utils/activate_wsl.sh
-
-LS_COLORS='ow=01;36;40'
-
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt autocd extendedglob
 bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/walter/.zshrc'
 
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/zsh-autosuggestions/zsh-autosuggestions.zsh
+eval "$(fasd --init auto)"
+source ~/powerlevel10k/powerlevel10k.zsh-theme
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-eval $(/mnt/d/Utils/weasel-pageant-1.1/weasel-pageant -r)
+# git alias
+source ~/dotfiles/zsh/git_alias.sh
+export EXA_COLORS="uu=38;5;023:da=38;5;166"
+alias ls="exa --icons"
 
-export GOPATH=~/go
-export PATH=$PATH:$GOPATH/bin
+path+=('/home/walter/go/bin')
+path+=('/mnt/c/Users/Homer Simpson/go/bin')
+export PATH
+alias vi="nvim"
+alias ll="exa -lah"
 
+source /usr/share/nvm/init-nvm.sh
+
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
