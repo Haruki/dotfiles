@@ -1,6 +1,18 @@
 # 1: Tastatureinstellungen auf latin1 mit nodeadkeys
 loadkeys de-latin1-nodeadkeys
 
+# optional: timezone:
+# welche gibts?:
+timedatectl list-timezones | grep Berlin
+
+#einstellen:
+ timedatectl set-timezone Europe/Berlin
+
+# zeit aktualisieren:
+
+#check
+timedatectl
+
 # 2: Festplatte partitionieren (EFI oder BIOS), gdisk oder fdisk
 gdisk /dev/sda
 
