@@ -58,7 +58,7 @@ btrfs subvolume list /mnt
  reflector -c Germany -a 12 --sort rate --save /etc/pacman.d/mirrorlist
 
 # pacman basic packages
-pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient
+pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient btrfs-progs
 
 # intel:
 #pacstrap /mnt intel-ucode

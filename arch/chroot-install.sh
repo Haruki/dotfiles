@@ -42,7 +42,7 @@ passwd
 
 # bootloader GRUB
 
-pacman -S grub efibootmgr
+pacman -S grub efibootmgr grub-btrfs
 
 # BIOS
 # grub-install /dev/sda
