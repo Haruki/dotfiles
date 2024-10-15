@@ -35,6 +35,9 @@ mount -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@home /de
 #show new subvolumes:
 btrfs subvolume list /mnt
 
+#ACHUTNG: manuell noch mkinitcpio editieren:
+nvim /mnt/etc/mkinitcpio.conf
+#change MODULES=() to MODULES=(btrfs)
 
 #------------------BTRFS-END------------
 
