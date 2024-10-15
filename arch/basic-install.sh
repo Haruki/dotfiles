@@ -13,6 +13,22 @@
 
 # swap and linux:
 #mkfs.ext4 -L arch /dev/sda3
+
+#---------------------BTRFS---------
+#btrfs: 
+mkfs.btrfs -L arch /dev/nvme0n1p3
+#mount for creating subvolumes:
+mount /dev/nvme0n1p3 /mnt
+cd /mnt
+btrfs subvolume create @
+btrfs subvolume create @home
+#unmount mnt
+cd
+umount /mnt
+
+
+#------------------BTRFS-END------------
+
 #mkswap -L swap /dev/sda2
 
 
