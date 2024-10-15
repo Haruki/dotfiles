@@ -24,7 +24,16 @@ btrfs subvolume create @
 btrfs subvolume create @home
 #unmount mnt
 cd
+#unmount for mounting the new subvolumes instead
 umount /mnt
+
+mount -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@ /dev/nvme0n1p3 /mnt
+#create home folder:
+mkdir /mnt/home
+#mount home subvolume to new home folder:
+mount -o noatime,ssd,compress=zstd,space_cache=v2,discard=async,subvol=@home /dev/nvme0n1p3 /mnt/home
+#show new subvolumes:
+btrfs subvolume list /mnt
 
 
 #------------------BTRFS-END------------
@@ -46,8 +55,7 @@ umount /mnt
 # ------------------------ BASIC SYSTEM ---------------------------
 
 # pacman mirrorlist config:
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
-grep -E -A 1 ".*Germany.*$" /etc/pacman.d/mirrorlist.bak  | sed '/--/d' > /etc/pacman.d/mirrorlist
+ reflector -c Germany -a 12 --sort rate --save /etc/pacman.d/mirrorlist
 
 # pacman basic packages
 pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient
@@ -67,7 +75,7 @@ pacstrap /mnt wpa_supplicant netctl dialog openssh
 
 
 # fstab
-genfstab -p /mnt/ > /mnt/etc/fstab
+genfstab -U -p /mnt/ > /mnt/etc/fstab
 
 
 #Locale copy. needed by next script to generate locales in arch_chroot
@@ -75,4 +83,6 @@ cat /etc/locale.gen | sed 's/#de_DE/de_DE/' | sed 's/#en_US/en_US/' > /mnt/etc/l
 
 
 echo 'DOTO: fstab relatime -> noatime + discard'
+# siehe auch mount options fuer btrfs
+
 
