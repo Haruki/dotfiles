@@ -27,8 +27,11 @@ echo "::1		localhost.localdomain		localhost" >> /etc/hosts
 
 
 
+#modified: 
+#1. actually write to pacman.conf
+#2. also uncomment multilib header
+sudo sed -i '/#\[multilib\]/{s/#//;n;s/#Include/Include/}' /etc/pacman.conf && sudo sed -i '/\[multilib\]/a SigLevel = PackageRequired TrustedOnly' /etc/pacman.conf
 
-cat /etc/pacman.conf  | sed '/\[multilib\]/{n;s/#Include/Include/}' | sed '/\[multilib\]/a SigLevel = PackageRequired TrustedOnly'
 
 # update packagelist
 pacman -Sy
