@@ -1,0 +1,65 @@
+---
+- name: Streamlined Configuration for Vegeta Host
+  hosts: setuphosts
+  become: true
+  vars:
+    packages_to_install:
+      - sudo
+      - acpid
+      - dbus
+      - avahi
+      - cups
+      - cronie
+      - man-db
+      - man-pages
+    services_to_enable:
+      - acpid
+      - avahi-daemon
+      - cups
+      - cronie
+      - systemd-timesyncd
+
+  tasks:
+    - name: Ensure 'walter' user exists with sudo privileges
+      ansible.builtin.user:
+        name: walter
+        group: users
+        groups: wheel
+        shell: /bin/bash
+        create_home: true
+        append: true
+
+    - name: Set password for user 'walter'
+      ansible.builtin.command:
+        cmd: echo walter:white | chpasswd -c
+      no_log: true  # Conceal password in logs
+
+    - name: Ensure necessary packages are installed
+      ansible.builtin.pacman:
+        name: "{{ packages_to_install }}"
+        update_cache: yes
+        state: present
+
+    - name: Enable required services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: true
+        state: started
+      loop: "{{ services_to_enable }}"
+
+    - name: Uncomment '%wheel ALL=(ALL) ALL' in sudoers file
+      ansible.builtin.lineinfile:
+        path: /etc/sudoers
+        regexp: '^# %wheel ALL=\(ALL\) ALL'
+        line: '%wheel ALL=(ALL) ALL'
+        validate: 'visudo -cf %s'
+
+    - name: Update the manual database
+      ansible.builtin.command:
+        cmd: mandb
+      when: "'man-db' in packages_to_install"
+
+    - name: Set the hardware clock
+      ansible.builtin.command:
+        cmd: hwclock -w
+
