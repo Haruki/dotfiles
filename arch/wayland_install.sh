@@ -24,3 +24,5 @@ wget "https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/N
 fc-cache
 fc-list
 
+# system tray
+sudo pacman -S waybar
