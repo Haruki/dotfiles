@@ -20,10 +20,12 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ~/zsh-autosuggestions
 echo "source ~/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ~/.zshrc
 
 #fasd
-git clone https://github.com/clvv/fasd.git ~/fasd
-cd ~/fasd
-sudo make install
-echo 'eval "$(fasd --init auto)"' >> ~/.zshrc
+# git clone https://github.com/clvv/fasd.git ~/fasd
+# cd ~/fasd
+# sudo make install
+# echo 'eval "$(fasd --init auto)"' >> ~/.zshrc
+sudo pacman -S zoxide
+echo 'eval "$(zoxide init zsh)"' >> ~/.zshrc
 
 #powerlevel10k
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
