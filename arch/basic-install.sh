@@ -9,7 +9,7 @@
 
 # create filesystems:
 # EFI:
-#mkfs.fat -F 32 -n EFIBOOT /dev/sda1
+mkfs.fat -F 32 -n EFIBOOT /dev/sda1
 
 # swap and linux:
 #mkfs.ext4 -L arch /dev/sda3
@@ -47,8 +47,10 @@ nvim /mnt/etc/mkinitcpio.conf
 #mount (linux + swap + boot)
 
 #mount -L arch /mnt
-#mkdir -p /mnt/boot
-#mount -L EFIBOOT /mnt/boot
+
+mkdir -p /mnt/boot
+mount -L EFIBOOT /mnt/boot
+
 #swapon -L swap
 
 
@@ -64,7 +66,7 @@ nvim /mnt/etc/mkinitcpio.conf
 pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient btrfs-progs
 
 # intel:
-#pacstrap /mnt intel-ucode
+pacstrap /mnt intel-ucode
 
 # basic work stuff
 pacstrap /mnt vim neovim git wget unzip
