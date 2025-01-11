@@ -10,7 +10,7 @@ pacman -Sy
 pacman -S sudo
 
 #uncomment %wheel entry
-sed -i 's/# %wheel ALL=(ALL) ALL$/%wheel ALL=(ALL) ALL/'   /etc/sudoers 
+sed -i 's/# %wheel ALL=(ALL:ALL) ALL$/%wheel ALL=(ALL:ALL) ALL/'   /etc/sudoers 
 
 #user zur gruppe wheel hinzufügen:
 gpasswd -a riker wheel
