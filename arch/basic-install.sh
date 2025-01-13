@@ -48,8 +48,12 @@ nvim /mnt/etc/mkinitcpio.conf
 
 #mount -L arch /mnt
 
+#ACHTUNG: mit btrfs wird die efi partition nur nach /efi gemounted
+#damit /boot in snapshots enthalten ist.
+
 mkdir -p /mnt/boot
-mount -L EFIBOOT /mnt/boot
+mkdir -p /mnt/efi
+mount -L EFIBOOT /mnt/efi
 
 #swapon -L swap
 

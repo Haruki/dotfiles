@@ -51,7 +51,9 @@ pacman -S grub efibootmgr grub-btrfs
 # grub-install /dev/sda
 
 #EFI
-grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
+#grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=grub
+# ACHTUNG: Bootpartition separat auf /efi und /boot ist im root subvolume enthalten!
+grub-install --target=x86_64-efi --efi-directory=/efi --boot-directory=/boot --bootloader-id=grub
 #BIOS MBR
 #grub-install /dev/sda
 
