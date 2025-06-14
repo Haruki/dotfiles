@@ -24,5 +24,8 @@ wget "https://github.com/romkatv/dotfiles-public/raw/master/.local/share/fonts/N
 fc-cache
 fc-list
 
+# font für asiatische Schriftzeichen (unter anderem)
+sudo pacman -S noto-fonts-{cjk,emoji,extra} 
+
 # system tray
 sudo pacman -S waybar
