@@ -20,7 +20,7 @@ pacman -S acpid dbus avahi cups cronie
 
 systemctl enable acpid
 systemctl enable avahi-daemon
-systemctl enable org.cups.cupsd.service
+systemctl enable cups.service
 systemctl enable cronie
 systemctl enable --now systemd-timesyncd.service
 
