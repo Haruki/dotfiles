@@ -64,7 +64,7 @@ mount -L EFIBOOT /mnt/efi
 # ------------------------ BASIC SYSTEM ---------------------------
 
 # pacman mirrorlist config:
- reflector -c Germany -a 12 --sort rate --save /etc/pacman.d/mirrorlist
+# reflector -c Germany -a 12 --sort rate --save /etc/pacman.d/mirrorlist
 
 # pacman basic packages
 pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient btrfs-progs
