@@ -1,6 +1,14 @@
 # 1: Tastatureinstellungen auf latin1 mit nodeadkeys
 loadkeys de-latin1-nodeadkeys
 
+# enable ssh for remote install:
+# pacman -Sy
+# pacman -S git neovim
+# nvim /etc/ssh/sshd_config
+# hinzufügen: `PermitRootLogin yes'
+# Passwort für root setzen:
+# passwd  
+
 # optional: timezone:
 # welche gibts?:
 timedatectl list-timezones | grep Berlin
