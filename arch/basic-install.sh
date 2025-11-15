@@ -67,7 +67,7 @@ mount -L EFIBOOT /mnt/efi
 # reflector -c Germany -a 12 --sort rate --save /etc/pacman.d/mirrorlist
 
 # pacman basic packages
-pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient btrfs-progs
+pacstrap /mnt base base-devel linux bash-completion dhcp dhcpcd dhclient btrfs-progs reflector
 
 # intel:
 pacstrap /mnt intel-ucode
