@@ -6,6 +6,7 @@ useradd -m -g users -s /bin/bash riker
 passwd riker
 
 #sudo
+reflector --country Germany --latest 10 --sort rate --save /etc/pacman.d/mirrorlist
 pacman -Sy
 pacman -S sudo
 
