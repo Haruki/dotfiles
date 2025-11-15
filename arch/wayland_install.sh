@@ -1,9 +1,12 @@
 # wayland + hyprland + kitty + fonts + basic config
+# intel:
+# sudo pacman -S mesa libva-intel-driver intel-media-driver mesa-utils mesa-demos egl-wayland linux-firmware
 
-sudo pacman -S mesa libva-intel-driver intel-media-driver mesa-utils mesa-demos egl-wayland linux-firmware
+# AMD:
+sudo pacman -S mesa linux-firmware-amdgpu mesa-utils mesa-demos egl-wayland linux-firmware vulkan-radeon amdgpu_top
 
 # hyprland+kitty + wayland dependencies
-sudo pacman -S hyprland kitty wayland xorg-xwayland wlroots polkit xdg-desktop-portal-hyprland
+sudo pacman -S hyprland kitty wayland xorg-xwayland polkit xdg-desktop-portal-hyprland
 
 # login manager
 sudo pacman -S greetd greetd-tuigreet
